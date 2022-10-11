@@ -1,4 +1,5 @@
 import 'package:assignment_1/notification_icon.dart';
+import 'package:assignment_1/video_player.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:badges/badges.dart';
@@ -47,7 +48,6 @@ class _HomePageState extends State<HomePage>
                 counter++;
               });
             },
-          
           )
         ],
         backgroundColor: Colors.white,
@@ -73,50 +73,67 @@ class _HomePageState extends State<HomePage>
                           fontSize: 35.0,
                           fontWeight: FontWeight.w900,
                         )),
-                    const SizedBox(height: 20 ),
+                    const SizedBox(height: 20),
                     CarouselSlider(
                       items: [
                         //const SizedBox(height: 39),
                         //1st Image of Slider
-                        
+
                         Center(
                           child: Stack(
                             children: <Widget>[
-                              Container(
-                                //height: 230,
-                                width: 190,
-                                alignment: Alignment.center,
-                                margin: const EdgeInsets.all(2.0),
-                                decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(8.0),
-                                  color: Colors.black,
-                                  image: DecorationImage(
-                                    fit: BoxFit.cover,
-                                    colorFilter: ColorFilter.mode(
-                                        Colors.black.withOpacity(0.4),
-                                        BlendMode.dstATop),
-                                    image: const NetworkImage(
-                                        "https://images.unsplash.com/photo-1534438327276-14e5300c3a48?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8M3x8Z3ltfGVufDB8fDB8fA%3D%3D&w=1000&q=80"),
-                                    //fit: BoxFit.fitWidth,
+                              GestureDetector(
+                                onTap: (() {
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) =>
+                                            VideoPlayerScreen()),
+                                  );
+                                }),
+                                child: Container(
+                                  height: 230,
+                                  width: 190,
+                                  alignment: Alignment.center,
+                                  margin: const EdgeInsets.all(2.0),
+                                  decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(8.0),
+                                    color: Colors.black,
+                                    image: DecorationImage(
+                                      fit: BoxFit.cover,
+                                      colorFilter: ColorFilter.mode(
+                                          Colors.black.withOpacity(0.4),
+                                          BlendMode.dstATop),
+                                      image: const NetworkImage(
+                                          "https://images.unsplash.com/photo-1534438327276-14e5300c3a48?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8M3x8Z3ltfGVufDB8fDB8fA%3D%3D&w=1000&q=80"),
+                                      //fit: BoxFit.fitWidth,
+                                    ),
                                   ),
-
-                                  
                                 ),
                               ),
                               SizedBox(height: 50),
-                             const Positioned(
-                                  top: 25,
-                                  right: 2,
-                                  left: 10,
-                                  bottom: 10,
-                                  
-                                  child: Text(
-                                    'Shoulders+Back',
-                                    style: TextStyle(
-                                        color: Colors.white,
-                                        fontWeight: FontWeight.w700,
-                                        fontSize: 24.0),
-                                  )),
+                              TextButton(
+                                onPressed: () {
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) =>
+                                            VideoPlayerScreen()),
+                                  );
+                                },
+                                child: const Positioned(
+                                    top: 25,
+                                    right: 2,
+                                    left: 10,
+                                    bottom: 10,
+                                    child: Text(
+                                      'Shoulders+Back',
+                                      style: TextStyle(
+                                          color: Colors.white,
+                                          fontWeight: FontWeight.w700,
+                                          fontSize: 24.0),
+                                    )),
+                              ),
                               const Positioned(
                                   top: 60,
                                   right: 10,
@@ -133,7 +150,12 @@ class _HomePageState extends State<HomePage>
                                 top: 160,
                                 left: 15,
                                 child: ElevatedButton(
-                                  onPressed: () {},
+                                  onPressed: () {
+                                    Navigator.of(context)
+                                        .push(MaterialPageRoute(
+                                      builder: (context) => VideoPlayerScreen(),
+                                    ));
+                                  },
                                   // ignore: sort_child_properties_last
                                   child: Row(
                                     mainAxisAlignment:
@@ -177,6 +199,7 @@ class _HomePageState extends State<HomePage>
                                         BlendMode.dstATop),
                                     image: const NetworkImage(
                                         "https://media.gettyimages.com/photos/view-of-a-row-of-treadmills-in-a-gym-with-people-picture-id1183038884?s=612x612"),
+
                                     //fit: BoxFit.cover,
                                   ),
                                 ),
@@ -461,7 +484,7 @@ class _HomePageState extends State<HomePage>
                       options: CarouselOptions(
                         height: 230.0,
                         enlargeCenterPage: true,
-                        autoPlay: true,
+                        //autoPlay: true,
                         aspectRatio: 16 / 9,
                         autoPlayCurve: Curves.fastOutSlowIn,
                         // enableInfiniteScroll: true,
@@ -530,7 +553,6 @@ class _HomePageState extends State<HomePage>
                                           fontWeight: FontWeight.normal,
                                           fontSize: 22.0),
                                     )),
-                              
                               ],
                             ),
                           ),
@@ -576,34 +598,6 @@ class _HomePageState extends State<HomePage>
                                         fontWeight: FontWeight.normal,
                                         fontSize: 22.0),
                                   )),
-                              // Positioned(
-                              //   //alignment: Alignment.bottomLeft,
-                              //   top: 120,
-                              //   left: 15,
-                              //   //bottom: 10,
-                              //   child: ElevatedButton(
-                              //     onPressed: () {},
-                              //     // ignore: sort_child_properties_last
-                              //     child: Row(
-                              //       mainAxisAlignment:
-                              //           MainAxisAlignment.spaceEvenly,
-                              //       children: const [
-                              //         Icon(
-                              //           Icons.star,
-                              //           size: 15,
-                              //           color: Colors.white,
-                              //         ),
-                              //         Text(" 3.8"),
-                              //       ],
-                              //     ),
-                              //     style: ElevatedButton.styleFrom(
-                              //         primary:
-                              //             const Color.fromARGB(255, 10, 169, 169),
-
-                              //         //alignment: Alignment.bottomLeft,
-                              //         shape: const StadiumBorder()),
-                              //   ),
-                              // )
                             ]),
                           )
                         ],

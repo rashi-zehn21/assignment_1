@@ -85,9 +85,9 @@ assets:
   # list giving the asset and other descriptors for the font. For
   # example:
 fonts:
-    - family: Roboto-Bold
+    - family: Montserrat
       fonts:
-        - asset: fonts/Roboto-Bold.ttf.
+        - asset: fonts/Montserrat/Montserrat-Bold.ttf
   #       - asset: fonts/Schyler-Italic.ttf
   #         style: italic
   #   - family: Trajan Pro

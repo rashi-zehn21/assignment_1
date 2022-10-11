@@ -1,5 +1,6 @@
 // ignore_for_file: unnecessary_this, sort_child_properties_last, prefer_const_literals_to_create_immutables
 
+import 'package:assignment_1/home_page.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:video_player/video_player.dart';
@@ -67,16 +68,24 @@ class _VideoPlayerScreenState extends State<VideoPlayerScreen> {
           Row(
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
-              Container(
-                height: 100,
+              SizedBox(
+                width: 35,
+                height: 95,
                 child: IconButton(
-                    onPressed: () => {Navigator.pop(context)},
-                    icon: const Icon(Icons.arrow_back_ios_sharp,
-                        size: 30.0, color: Colors.black)),
+                    onPressed: () => {
+                          Navigator.of(context).push(MaterialPageRoute(
+                            builder: (context) => const HomePage(),
+                          ))
+                        },
+                    icon: Icon(
+                      Icons.arrow_back_ios,
+                      size: 30.0,
+                      color: Colors.black,
+                    )),
               ),
             ],
           ),
-          //const SizedBox(height: ),
+          //const SizedBox(height: 2),
           Stack(
             children: [
               FutureBuilder(
@@ -88,7 +97,12 @@ class _VideoPlayerScreenState extends State<VideoPlayerScreen> {
                       child: VideoPlayer(_controller),
                     );
                   } else {
-                    return const Center(child: LinearProgressIndicator());
+                    return const Center(
+                        child: CircularProgressIndicator(
+                      color: Color.fromARGB(255, 10, 169, 169),
+                      strokeWidth: 3,
+                      //backgroundColor: Color.fromARGB(255, 10, 169, 169),
+                    ));
                   }
                 },
               ),
@@ -96,36 +110,35 @@ class _VideoPlayerScreenState extends State<VideoPlayerScreen> {
               Positioned(
                 top: 170,
                 left: 10,
-                child: IconButton(
-                    onPressed: () {
-                      setState(() {
-                        // pause
-                        if (_controller.value.isPlaying) {
-                          _controller.pause();
-                        } else {
-                          // play
-                          _controller.play();
-                        }
-                      });
-                    },
-                    icon: Positioned(
-                      child: Container(
-                        height: 90,
-                        // height: 95,
-                        width: 95,
-                        decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(100),
-                            color: Color.fromARGB(255, 10, 169, 169)),
-                        //color: Color.fromARGB(255, 10, 169, 169),
-                        child: Icon(
-                          color: Colors.white,
-                          size: 34,
-                          _controller.value.isPlaying
-                              ? Icons.pause
-                              : Icons.play_arrow,
-                        ),
-                      ),
-                    )),
+                child: InkWell(
+                  onTap: () {
+                    setState(() {
+                      // pause
+                      if (_controller.value.isPlaying) {
+                        _controller.pause();
+                      } else {
+                        // play
+                        _controller.play();
+                      }
+                    });
+                  },
+                  child: Container(
+                    height: 45,
+                    // height: 95,
+                    width: 45,
+                    decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(100),
+                        color: Color.fromARGB(255, 10, 169, 169)),
+                    //color: Color.fromARGB(255, 10, 169, 169),
+                    child: Icon(
+                      color: Colors.white,
+                      size: 34,
+                      _controller.value.isPlaying
+                          ? Icons.pause
+                          : Icons.play_arrow,
+                    ),
+                  ),
+                ),
               ),
               Positioned(
                 left: 40,
@@ -214,7 +227,7 @@ class _VideoPlayerScreenState extends State<VideoPlayerScreen> {
               " Shoulders + Back",
               style: TextStyle(
                   fontSize: 29,
-                  fontFamily: "Roboto-Bold",
+                  fontFamily: "Montserrat",
                   fontWeight: FontWeight.bold),
             ),
           ),
@@ -227,6 +240,7 @@ class _VideoPlayerScreenState extends State<VideoPlayerScreen> {
               style: TextStyle(
                   color: Colors.black,
                   fontWeight: FontWeight.normal,
+                  fontFamily: "Montserrat-Bold",
                   fontSize: 19.0),
             )),
           ),
