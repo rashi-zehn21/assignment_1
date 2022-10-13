@@ -77,7 +77,7 @@ class _VideoPlayerScreenState extends State<VideoPlayerScreen> {
                             builder: (context) => const HomePage(),
                           ))
                         },
-                    icon: Icon(
+                    icon: const Icon(
                       Icons.arrow_back_ios,
                       size: 30.0,
                       color: Colors.black,
@@ -123,9 +123,9 @@ class _VideoPlayerScreenState extends State<VideoPlayerScreen> {
                     });
                   },
                   child: Container(
-                    height: 45,
+                    height: 40,
                     // height: 95,
-                    width: 45,
+                    width: 40,
                     decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(100),
                         color: Color.fromARGB(255, 10, 169, 169)),
