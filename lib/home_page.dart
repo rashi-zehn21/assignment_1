@@ -1,3 +1,5 @@
+import 'dart:html';
+
 import 'package:assignment_1/notification_icon.dart';
 import 'package:assignment_1/video_player.dart';
 import 'package:carousel_slider/carousel_slider.dart';
@@ -7,6 +9,8 @@ import 'package:motion_tab_bar_v2/motion-tab-bar.dart';
 
 // optional, only if using provided badge style
 import 'package:motion_tab_bar_v2/motion-badge.widget.dart';
+
+import 'bloc/video_bloc.dart';
 //import 'package:flutter/material.dart';
 
 // import 'motion_tab_bar.dart';
@@ -23,6 +27,13 @@ class _HomePageState extends State<HomePage>
   int counter = 0;
   TabController? _tabController;
 
+    VideoBloc bloc =VideoBloc();
+
+  callvideoBlocEvent() {
+    bloc.add(VideoScreenPressed(Url: Url));
+  }
+
+
   @override
   void initState() {
     _tabController = TabController(
@@ -30,6 +41,7 @@ class _HomePageState extends State<HomePage>
       length: 4,
       vsync: this,
     );
+
     super.initState();
   }
 

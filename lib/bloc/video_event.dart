@@ -1,6 +1,6 @@
 //part of 'login_bloc.dart';
-
-import 'package:flutter/material.dart';
+part of 'video_bloc.dart';
+//import 'package:flutter/material.dart';
 
 abstract class VideoEvent {
   const VideoEvent();
@@ -11,7 +11,7 @@ class VideoScreenPressed extends VideoEvent {
   //String? password;
 
   VideoScreenPressed({
-    @required this.url,
+     this.url, required Type Url,
     //@required this.password,
   });
 
