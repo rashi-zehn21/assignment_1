@@ -1,0 +1,34 @@
+{
+    "data":[
+    {
+    "Training_Name":"Training_Name",
+    "Duration":"Duration",
+    "Ratings":"Ratings"
+    },
+    {
+    "Training_Name":"Dumbbell bicep ",
+    "Duration":"15 min ",
+    "Ratings":"4.2"
+    },
+    {
+    "Training_Name":"Crunches",
+    "Duration":"20 min ",
+    "Ratings":"3.8"
+    },
+    {
+    "Training_Name":"Treadmill",
+    "Duration":"15 min ",
+    "Ratings":"3.6"
+    },
+    {
+    "Training_Name":"Box jumps",
+    "Duration":"10 min ",
+    "Ratings":"3.8"
+    },
+    {
+    "Training_Name":"Squat jumps ",
+    "Duration":"5 min ",
+    "Ratings":"2.1"
+    }
+    ]
+    }

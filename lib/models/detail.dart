@@ -1,31 +1,55 @@
-class Training {
-  final String Training_name;
-  final String images;
-  final double rating;
-  final String totalTime;
+// To parse this JSON data, do
+//
+//     final homeDetail = homeDetailFromJson(jsonString);
 
-  Training(
-      {required this.Training_name,
-      required this.images,
-      required this.rating,
-      required this.totalTime});
+import 'dart:convert';
 
-  factory Training.fromJson(dynamic json) {
-    return Training(
-        Training_name: json['name'] as String,
-        images: json['images'][0]['hostedLargeUrl'] as String,
-        rating: json['rating'] as double,
-        totalTime: json['totalTime'] as String);
-  }
+HomeDetail homeDetailFromJson(String str) =>
+    HomeDetail.fromJson(json.decode(str));
 
-  static List<Training> recipesFromSnapshot(List snapshot) {
-    return snapshot.map((data) {
-      return Training.fromJson(data);
-    }).toList();
-  }
+String homeDetailToJson(HomeDetail data) => json.encode(data.toJson());
 
-  @override
-  String toString() {
-    return 'Recipe {name: $Training_name, image: $images, rating: $rating, totalTime: $totalTime}';
-  }
+class HomeDetail {
+  HomeDetail({
+    this.data,
+  });
+
+  List<Datum>? data;
+
+  factory HomeDetail.fromJson(Map<String, dynamic> json) => HomeDetail(
+        data: json["data"] == null
+            ? null
+            : List<Datum>.from(json["data"].map((x) => Datum.fromJson(x))),
+      );
+
+  Map<String, dynamic> toJson() => {
+        "data": data == null
+            ? null
+            : List<dynamic>.from(data!.map((x) => x.toJson())),
+      };
+}
+
+class Datum {
+  Datum({
+    this.trainingName,
+    this.duration,
+    this.ratings,
+  });
+
+  String? trainingName;
+  String? duration;
+  String? ratings;
+
+  factory Datum.fromJson(Map<String, dynamic> json) => Datum(
+        trainingName:
+            json["Training_Name"] == null ? null : json["Training_Name"],
+        duration: json["Duration"] == null ? null : json["Duration"],
+        ratings: json["Ratings"] == null ? null : json["Ratings"],
+      );
+
+  Map<String, dynamic> toJson() => {
+        "Training_Name": trainingName == null ? null : trainingName,
+        "Duration": duration == null ? null : duration,
+        "Ratings": ratings == null ? null : ratings,
+      };
 }

@@ -1,6 +1,6 @@
 import 'dart:async';
 
-import 'package:assignment_1/bloc/video_bloc.dart';
+import 'package:assignment_1/bloc/home_bloc.dart';
 import 'package:connectivity/connectivity.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
