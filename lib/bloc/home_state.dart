@@ -12,8 +12,6 @@ class HomeDetailInitail extends HomeDetailState {
 }
 
 class HomeDetailLoading extends HomeDetailState {
- 
-
   HomeDetailLoading();
 
   @override
@@ -21,7 +19,7 @@ class HomeDetailLoading extends HomeDetailState {
 }
 
 class HomeDetailSuccess extends HomeDetailState {
-  Future<List> item;
+  final item;
 
   HomeDetailSuccess({required this.item});
   //String? password;
@@ -40,11 +38,11 @@ class HomeDetailSuccess extends HomeDetailState {
 }
 
 class HomeDetailError extends HomeDetailState {
-  final err;
-  HomeDetailError({this.err});
-  HomeDetailError copyWith({var err}) {
-    return HomeDetailError(err: err ?? this.err);
-  }
+  String err;
+  HomeDetailError({required this.err});
+  // HomeDetailError copyWith({var err}) {
+  //   return HomeDetailError(err: err ?? this.err);
+  // }
 
   @override
   List<Object> get props => [err];

@@ -1,34 +1,40 @@
 {
     "data":[
     {
-    "Training_Name":"Training_Name",
-    "Duration":"Duration",
-    "Ratings":"Ratings"
+    "Training_Name":"Box jump",
+    "Duration":"20 min ",
+    "Ratings":"4.2",
+    "img": "https://media.gettyimages.com/photos/view-of-a-row-of-treadmills-in-a-gym-with-people-picture-id1183038884?s=612x612"
     },
     {
     "Training_Name":"Dumbbell bicep ",
     "Duration":"15 min ",
-    "Ratings":"4.2"
+    "Ratings":"4.2",
+    "img":"https://img.freepik.com/premium-photo/3d-rendering-black-dumbbells-floor-dark-concept-fitness-room-with-training-equipments-back_67155-14961.jpg?w=2000"
     },
     {
     "Training_Name":"Crunches",
     "Duration":"20 min ",
-    "Ratings":"3.8"
+    "Ratings":"3.8",
+    "img":"https://image.shutterstock.com/image-photo/athletic-shirtless-young-sports-man-260nw-695401201.jpg"
     },
     {
     "Training_Name":"Treadmill",
     "Duration":"15 min ",
-    "Ratings":"3.6"
+    "Ratings":"3.6",
+    "img":"https://media.gettyimages.com/photos/view-of-a-row-of-treadmills-in-a-gym-with-people-picture-id1183038884?s=612x612"
     },
     {
     "Training_Name":"Box jumps",
     "Duration":"10 min ",
-    "Ratings":"3.8"
+    "Ratings":"3.8",
+    "img":"https://image.shutterstock.com/image-photo/athletic-shirtless-young-sports-man-260nw-695401201.jpg"
     },
     {
     "Training_Name":"Squat jumps ",
     "Duration":"5 min ",
-    "Ratings":"2.1"
+    "Ratings":"2.1",
+    "img":"https://image.shutterstock.com/image-photo/athletic-shirtless-young-sports-man-260nw-695401201.jpg"
     }
     ]
     }

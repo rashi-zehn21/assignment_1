@@ -14,7 +14,7 @@ class NotificationIcon extends StatelessWidget {
     this.onTap,
     required this.text,
     required this.iconData,
-    this.notificationCount = 0,
+    this.notificationCount = 10,
     required Null Function() onPressed,
   }) : super(key: key);
 
@@ -42,11 +42,11 @@ class NotificationIcon extends StatelessWidget {
             Positioned(
               top: 3,
               right: 6,
-              height: 20,
+              height: 25,
               width: 15,
               child: Container(
-                padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
-                decoration: const BoxDecoration(
+                padding: EdgeInsets.symmetric(horizontal: 6, vertical: 1),
+                decoration: BoxDecoration(
                   shape: BoxShape.circle,
                   color: Colors.red,
                 ),
