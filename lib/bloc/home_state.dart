@@ -39,7 +39,8 @@ class HomeDetailSuccess extends HomeDetailState {
 
 class HomeDetailError extends HomeDetailState {
   String err;
-  HomeDetailError({required this.err});
+  HomeDetailError({required this.
+  err});
   // HomeDetailError copyWith({var err}) {
   //   return HomeDetailError(err: err ?? this.err);
   // }

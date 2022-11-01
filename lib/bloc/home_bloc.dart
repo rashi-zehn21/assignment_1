@@ -17,14 +17,15 @@ class HomeDetailBloc extends Bloc<HomeDetailEvent, HomeDetailState> {
     try {
       if (event is VideoScreenPressed) {
         yield HomeDetailLoading();
-        final response = await getResponse();
-        // items = await readJson();
+        List items = [];
 
-        // print('$response');
-        if (response != null) {
-          print("jsonStringValues");
-          print(response);
-          yield HomeDetailSuccess(item: response);
+        final response = await rootBundle.loadString('assets/home.json');
+        final data = await json.decode(response);
+
+        items = data["data"];
+
+        if (items != null) {
+          yield HomeDetailSuccess(item: items);
         } else {
           yield HomeDetailError(err: 'Error');
         }

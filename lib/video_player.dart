@@ -10,14 +10,28 @@ import 'asset_widget_controller.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class VideoPlayerScreen extends StatefulWidget {
-  VideoPlayerScreen({Key? key}) : super(key: key);
+  final String url;
+  final String Trainig_Name;
+  final String Duration;
+  final String Ratings;
+  final String Description;
+  VideoPlayerScreen(
+      {Key? key,
+      required this.url,
+      required this.Trainig_Name,
+      required this.Duration,
+      required this.Description,
+      required this.Ratings})
+      : super(key: key);
 
   @override
-  // ignore: library_private_types_in_public_api
-  _VideoPlayerScreenState createState() => _VideoPlayerScreenState();
+  // VideoPlayerScreenState createState() => VideoPlayerScreenState();
+  State<StatefulWidget> createState() {
+    return VideoPlayerScreenState();
+  }
 }
 
-class _VideoPlayerScreenState extends State<VideoPlayerScreen> {
+class VideoPlayerScreenState extends State<VideoPlayerScreen> {
   double _value = 0;
   void downloadData() {
     Timer.periodic(const Duration(seconds: 1), (Timer timer) {
@@ -42,8 +56,7 @@ class _VideoPlayerScreenState extends State<VideoPlayerScreen> {
 
   @override
   void initState() {
-    _controller = VideoPlayerController.network(
-        'https://player.vimeo.com/external/403637875.sd.mp4?s=203929c386ecb701b2d70b551df5450a45a38ec0&profile_id=164&oauth2_token_id=57447761');
+    _controller = VideoPlayerController.network(widget.url);
 
     _initializeVideoPlayerFuture = _controller.initialize();
 
@@ -61,6 +74,11 @@ class _VideoPlayerScreenState extends State<VideoPlayerScreen> {
 
   @override
   Widget build(BuildContext context) {
+    String url = widget.url;
+    String Trainig_Name = widget.Trainig_Name;
+    String Ratings = widget.Ratings;
+    String Description = widget.Description;
+    String Duration = widget.Duration;
     final isMuted = _controller.value.volume == 0;
     return Scaffold(
       body: Column(
@@ -85,7 +103,6 @@ class _VideoPlayerScreenState extends State<VideoPlayerScreen> {
               ),
             ],
           ),
-          //const SizedBox(height: 2),
           Stack(
             children: [
               FutureBuilder(
@@ -97,7 +114,7 @@ class _VideoPlayerScreenState extends State<VideoPlayerScreen> {
                       child: VideoPlayer(_controller),
                     );
                   } else {
-                    return const Center(
+                    return Center(
                         child: CircularProgressIndicator(
                       color: Color.fromARGB(255, 10, 169, 169),
                       strokeWidth: 3,
