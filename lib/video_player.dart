@@ -1,5 +1,3 @@
-// ignore_for_file: unnecessary_this, sort_child_properties_last, prefer_const_literals_to_create_immutables
-
 import 'package:assignment_1/home_page.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -11,14 +9,14 @@ import 'package:google_fonts/google_fonts.dart';
 
 class VideoPlayerScreen extends StatefulWidget {
   final String url;
-  final String Trainig_Name;
+  final String Training_Name;
   final String Duration;
   final String Ratings;
   final String Description;
   VideoPlayerScreen(
       {Key? key,
       required this.url,
-      required this.Trainig_Name,
+      required this.Training_Name,
       required this.Duration,
       required this.Description,
       required this.Ratings})
@@ -75,7 +73,7 @@ class VideoPlayerScreenState extends State<VideoPlayerScreen> {
   @override
   Widget build(BuildContext context) {
     String url = widget.url;
-    String Trainig_Name = widget.Trainig_Name;
+    String Training_Name = widget.Training_Name;
     String Ratings = widget.Ratings;
     String Description = widget.Description;
     String Duration = widget.Duration;
@@ -103,141 +101,145 @@ class VideoPlayerScreenState extends State<VideoPlayerScreen> {
               ),
             ],
           ),
-          Stack(
-            children: [
-              FutureBuilder(
-                future: _initializeVideoPlayerFuture,
-                builder: (context, snapshot) {
-                  if (snapshot.connectionState == ConnectionState.done) {
-                    return AspectRatio(
-                      aspectRatio: _controller.value.aspectRatio,
-                      child: VideoPlayer(_controller),
-                    );
-                  } else {
-                    return Center(
-                        child: CircularProgressIndicator(
-                      color: Color.fromARGB(255, 10, 169, 169),
-                      strokeWidth: 3,
-                      //backgroundColor: Color.fromARGB(255, 10, 169, 169),
-                    ));
-                  }
-                },
-              ),
-
-              Positioned(
-                top: 170,
-                left: 10,
-                child: InkWell(
-                  onTap: () {
-                    setState(() {
-                      // pause
-                      if (_controller.value.isPlaying) {
-                        _controller.pause();
-                      } else {
-                        // play
-                        _controller.play();
-                      }
-                    });
+          Container(
+            // height: 210,
+            //width: 400,
+            child: Stack(
+              children: [
+                FutureBuilder(
+                  future: _initializeVideoPlayerFuture,
+                  builder: (context, snapshot) {
+                    if (snapshot.connectionState == ConnectionState.done) {
+                      return AspectRatio(
+                        aspectRatio: _controller.value.aspectRatio,
+                        child: VideoPlayer(_controller),
+                      );
+                    } else {
+                      return Center(
+                          child: CircularProgressIndicator(
+                        color: Color.fromARGB(255, 10, 169, 169),
+                        strokeWidth: 3,
+                        //backgroundColor: Color.fromARGB(255, 10, 169, 169),
+                      ));
+                    }
                   },
-                  child: Container(
-                    height: 40,
-                    // height: 95,
-                    width: 40,
-                    decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(100),
-                        color: Color.fromARGB(255, 10, 169, 169)),
-                    //color: Color.fromARGB(255, 10, 169, 169),
-                    child: Icon(
-                      color: Colors.white,
-                      size: 34,
-                      _controller.value.isPlaying
-                          ? Icons.pause
-                          : Icons.play_arrow,
+                ),
+
+                Positioned(
+                  top: 170,
+                  left: 10,
+                  child: InkWell(
+                    onTap: () {
+                      setState(() {
+                        // pause
+                        if (_controller.value.isPlaying) {
+                          _controller.pause();
+                        } else {
+                          // play
+                          _controller.play();
+                        }
+                      });
+                    },
+                    child: Container(
+                      height: 40,
+                      // height: 95,
+                      width: 40,
+                      decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(100),
+                          color: Color.fromARGB(255, 10, 169, 169)),
+                      //color: Color.fromARGB(255, 10, 169, 169),
+                      child: Icon(
+                        color: Colors.white,
+                        size: 34,
+                        _controller.value.isPlaying
+                            ? Icons.pause
+                            : Icons.play_arrow,
+                      ),
                     ),
                   ),
                 ),
-              ),
-              Positioned(
-                left: 40,
-                child: Container(
-                    height: 175,
-                    width: 235,
-                    alignment: Alignment.bottomRight,
-                    margin: const EdgeInsets.all(25),
-                    child: const LinearProgressIndicator(
-                      value: 0.5,
-                      valueColor: AlwaysStoppedAnimation<Color>(
-                          Color.fromARGB(255, 10, 169, 169)),
-                      backgroundColor: Colors.grey,
-                      minHeight: 10,
-                    )),
-              ),
+                Positioned(
+                  left: 40,
+                  child: Container(
+                      height: 175,
+                      width: 235,
+                      alignment: Alignment.bottomRight,
+                      margin: const EdgeInsets.all(25),
+                      child: const LinearProgressIndicator(
+                        value: 0.5,
+                        valueColor: AlwaysStoppedAnimation<Color>(
+                            Color.fromARGB(255, 10, 169, 169)),
+                        backgroundColor: Colors.grey,
+                        minHeight: 10,
+                      )),
+                ),
 
-              // SizedBox(
-              //   width: 250,
-              //   height: 20,
-              //   child: LinearProgressIndicator(
-              //     value: this._value,
-              //     backgroundColor: Colors.cyan[100],
-              //valueColor: new AlwaysStoppedAnimation<Color>(Colors.green),
-              //   ),
-              // ),
-              // SizedBox(width: 10, height: 10),
-              // Text(
-              //   "" + (this._value * 100).round().toString() + "",
-              //   style: TextStyle(fontSize: 20),
-              // ),
+                // SizedBox(
+                //   width: 250,
+                //   height: 20,
+                //   child: LinearProgressIndicator(
+                //     value: this._value,
+                //     backgroundColor: Colors.cyan[100],
+                //valueColor: new AlwaysStoppedAnimation<Color>(Colors.green),
+                //   ),
+                // ),
+                // SizedBox(width: 10, height: 10),
+                // Text(
+                //   "" + (this._value * 100).round().toString() + "",
+                //   style: TextStyle(fontSize: 20),
+                // ),
 
-              // Positioned(
+                // Positioned(
 
-              //   child: Slider(
-              //     min: 0.0,
-              //     max: 100.0,
-              //     value: _value,
-              //     onChanged: (value) {
-              //       setState(() {
-              //         _value = value;
-              //       });
-              //     },
-              //   ),
-              // ),
-              // Container(
-              //   height: 350,
-              //   width: double.maxFinite,
-              //   child: CupertinoSlider(
-              //     min: 0.0,
-              //     max: 100.0,
-              //     value: _value,
-              //     onChanged: (value) {
-              //       setState(() {
-              //         _value = value;
-              //       });
-              //     },
-              //   ),
-              // ),
+                //   child: Slider(
+                //     min: 0.0,
+                //     max: 100.0,
+                //     value: _value,
+                //     onChanged: (value) {
+                //       setState(() {
+                //         _value = value;
+                //       });
+                //     },
+                //   ),
+                // ),
+                // Container(
+                //   height: 350,
+                //   width: double.maxFinite,
+                //   child: CupertinoSlider(
+                //     min: 0.0,
+                //     max: 100.0,
+                //     value: _value,
+                //     onChanged: (value) {
+                //       setState(() {
+                //         _value = value;
+                //       });
+                //     },
+                //   ),
+                // ),
 
-              Positioned(
-                left: 310,
-                top: 180,
-                child: Icon(
-                    color: Colors.white,
-                    size: 28,
-                    _controller.value.isPlaying
-                        ? Icons.volume_down
-                        : Icons.volume_off),
-              ),
-              Positioned(
-                  left: 350,
+                Positioned(
+                  left: 310,
                   top: 180,
                   child: Icon(
                       color: Colors.white,
                       size: 28,
                       _controller.value.isPlaying
-                          ? Icons.fullscreen_exit_rounded
-                          : Icons.fullscreen_sharp))
-            ],
+                          ? Icons.volume_down
+                          : Icons.volume_off),
+                ),
+                Positioned(
+                    left: 350,
+                    top: 180,
+                    child: Icon(
+                        color: Colors.white,
+                        size: 28,
+                        _controller.value.isPlaying
+                            ? Icons.fullscreen_exit_rounded
+                            : Icons.fullscreen_sharp))
+              ],
+            ),
           ),
-          const SizedBox(height: 15),
+          const SizedBox(height: 25),
           const Padding(
             padding: EdgeInsets.only(right: 150),
             child: Text(
@@ -261,8 +263,9 @@ class VideoPlayerScreenState extends State<VideoPlayerScreen> {
                   fontSize: 19.0),
             )),
           ),
-          const SizedBox(height: 5),
+          const SizedBox(height: 10),
           Container(
+            height: MediaQuery.of(context).size.height / 15,
             margin: EdgeInsets.only(left: 18),
             alignment: Alignment.topLeft,
             child: ElevatedButton(
@@ -287,10 +290,10 @@ class VideoPlayerScreenState extends State<VideoPlayerScreen> {
           ),
           const SizedBox(height: 5),
           Container(
-            child: const Padding(
+            child: Padding(
               padding: EdgeInsets.all(18.0),
               child: Text(
-                "They’re a delicate joint and a meeting place for a host of tendons and ligaments,tendon attaches into the labrum, a key piece of cartilage that lends your shoulder major stability shoulder and back and latpulldowns one arm distance chin up and pulls delicate joint and a meeting place for a host of tendons and.",
+                widget.Description,
                 style: TextStyle(
                   fontSize: 15,
                   fontWeight: FontWeight.normal,

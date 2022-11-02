@@ -61,10 +61,10 @@ class _HomePageState extends State<HomePage>
         actions: [
           NotificationIcon(
             text: 'Inbox',
-            iconData: Icons.notifications,
+            iconData: Icons.notifications_rounded,
             notificationCount: counter,
             onPressed: () {
-              //print("Increment Counter");
+              print("Increment Counter");
               setState(() {
                 counter++;
               });
@@ -110,46 +110,30 @@ class _HomePageState extends State<HomePage>
                                     context,
                                     MaterialPageRoute(
                                         builder: (context) => VideoPlayerScreen(
-                                              url: state.item[itemIndex]["url"]
-                                                  .toString(),
+                                              url: state.item[itemIndex]["url"],
                                               Duration: state.item[itemIndex]
                                                   ["Duration"],
                                               Description: state.item[itemIndex]
                                                   ["Description"],
                                               Ratings: state.item[itemIndex]
                                                   ["Ratings"],
-                                              Trainig_Name:
+                                              Training_Name:
                                                   state.item[itemIndex]
-                                                      ["Trainig_Name"],
+                                                      ["Training_Name"],
                                             )));
                               },
                               child: Stack(
                                 children: <Widget>[
-                                  // GestureDetector(
-                                  //   onTap: (() {
-                                  //     Navigator.push(
-                                  //         context,
-                                  //         MaterialPageRoute(
-                                  //           builder: (context) =>
-                                  //               VideoPlayerScreen(
-                                  //             items: 'dee',
-                                  //             // items: state.item[itemIndex]["img"]
-                                  //             //     .toString(),
-                                  //           ),
-                                  // settings: RouteSettings(
-                                  //   arguments: state.item[itemIndex]
-                                  //           ["img"]
-                                  //       .toString(),
-                                  // )),
-                                  // ));
-                                  // }),
                                   Container(
-                                    height: 230,
-                                    width: 190,
+                                    height:
+                                        MediaQuery.of(context).size.height / 2,
+                                    width:
+                                        MediaQuery.of(context).size.width / 2,
                                     alignment: Alignment.center,
                                     margin: EdgeInsets.all(2.0),
                                     decoration: BoxDecoration(
                                       borderRadius: BorderRadius.circular(8.0),
+                              
                                       color: Colors.black,
                                       image: DecorationImage(
                                         fit: BoxFit.cover,
@@ -173,7 +157,7 @@ class _HomePageState extends State<HomePage>
                                         state.item[itemIndex]["Training_Name"],
                                         style: TextStyle(
                                             color: Colors.white,
-                                            fontWeight: FontWeight.w500,
+                                            fontWeight: FontWeight.w700,
                                             fontSize: 24.0),
                                       )),
                                   Positioned(
@@ -189,7 +173,7 @@ class _HomePageState extends State<HomePage>
                                       )),
                                   const SizedBox(height: 60),
                                   Positioned(
-                                    top: 160,
+                                    top: 145,
                                     left: 15,
                                     child: ElevatedButton(
                                       onPressed: () {},

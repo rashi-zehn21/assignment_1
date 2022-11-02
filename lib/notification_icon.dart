@@ -24,7 +24,7 @@ class NotificationIcon extends StatelessWidget {
       onTap: onTap,
       child: Container(
         width: 72,
-        padding: const EdgeInsets.symmetric(horizontal: 11),
+        padding: const EdgeInsets.symmetric(horizontal: 12),
         child: Stack(
           alignment: Alignment.center,
           children: [
@@ -40,12 +40,12 @@ class NotificationIcon extends StatelessWidget {
               ],
             ),
             Positioned(
-              top: 3,
-              right: 6,
+              top: 6,
+              right: 10,
               height: 25,
               width: 15,
               child: Container(
-                padding: EdgeInsets.symmetric(horizontal: 6, vertical: 1),
+                padding: EdgeInsets.symmetric(horizontal: 5, vertical: 2),
                 decoration: BoxDecoration(
                   shape: BoxShape.circle,
                   color: Colors.red,
