@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:video_player/video_player.dart';
 import 'dart:async';
 import 'package:percent_indicator/linear_percent_indicator.dart';
-import 'asset_widget_controller.dart';
+import '../asset_widget_controller.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class VideoPlayerScreen extends StatefulWidget {
@@ -43,11 +43,7 @@ class VideoPlayerScreenState extends State<VideoPlayerScreen> {
     });
   }
 
-  // void update() {
-  //   Timer.periodic(Duration(milliseconds: 100), (timer) {
-  //     setState(() {});
-  //   });
-  // }
+  
 
   late VideoPlayerController _controller;
   late Future<void> _initializeVideoPlayerFuture;
@@ -102,8 +98,7 @@ class VideoPlayerScreenState extends State<VideoPlayerScreen> {
             ],
           ),
           Container(
-            // height: 210,
-            //width: 400,
+            
             child: Stack(
               children: [
                 FutureBuilder(
@@ -119,7 +114,7 @@ class VideoPlayerScreenState extends State<VideoPlayerScreen> {
                           child: CircularProgressIndicator(
                         color: Color.fromARGB(255, 10, 169, 169),
                         strokeWidth: 3,
-                        //backgroundColor: Color.fromARGB(255, 10, 169, 169),
+                        
                       ));
                     }
                   },
@@ -142,12 +137,12 @@ class VideoPlayerScreenState extends State<VideoPlayerScreen> {
                     },
                     child: Container(
                       height: 40,
-                      // height: 95,
+                      
                       width: 40,
                       decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(100),
                           color: Color.fromARGB(255, 10, 169, 169)),
-                      //color: Color.fromARGB(255, 10, 169, 169),
+                     
                       child: Icon(
                         color: Colors.white,
                         size: 34,
@@ -174,49 +169,7 @@ class VideoPlayerScreenState extends State<VideoPlayerScreen> {
                       )),
                 ),
 
-                // SizedBox(
-                //   width: 250,
-                //   height: 20,
-                //   child: LinearProgressIndicator(
-                //     value: this._value,
-                //     backgroundColor: Colors.cyan[100],
-                //valueColor: new AlwaysStoppedAnimation<Color>(Colors.green),
-                //   ),
-                // ),
-                // SizedBox(width: 10, height: 10),
-                // Text(
-                //   "" + (this._value * 100).round().toString() + "",
-                //   style: TextStyle(fontSize: 20),
-                // ),
-
-                // Positioned(
-
-                //   child: Slider(
-                //     min: 0.0,
-                //     max: 100.0,
-                //     value: _value,
-                //     onChanged: (value) {
-                //       setState(() {
-                //         _value = value;
-                //       });
-                //     },
-                //   ),
-                // ),
-                // Container(
-                //   height: 350,
-                //   width: double.maxFinite,
-                //   child: CupertinoSlider(
-                //     min: 0.0,
-                //     max: 100.0,
-                //     value: _value,
-                //     onChanged: (value) {
-                //       setState(() {
-                //         _value = value;
-                //       });
-                //     },
-                //   ),
-                // ),
-
+              
                 Positioned(
                   left: 310,
                   top: 180,
@@ -270,11 +223,13 @@ class VideoPlayerScreenState extends State<VideoPlayerScreen> {
             alignment: Alignment.topLeft,
             child: ElevatedButton(
               onPressed: () {},
+          
               child: Row(
                 mainAxisSize: MainAxisSize.min,
                 mainAxisAlignment: MainAxisAlignment.start,
+               
                 children: <Widget>[
-                  // ignore: prefer_const_constructors
+                 
                   Icon(
                     Icons.star,
                     size: 15,

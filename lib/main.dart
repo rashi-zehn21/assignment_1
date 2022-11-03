@@ -2,12 +2,12 @@
 import 'package:assignment_1/store_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'video_player.dart';
+import 'Widget/video_player.dart';
 import 'home_page.dart';
 // import 'motion_tab_bar.dart';
 // import 'package:motion_tab_bar/motiontabbar.dart';
 import 'package:carousel_slider/carousel_slider.dart';
-import 'notification_icon.dart';
+import 'Widget/notification_icon.dart';
 
 void main() {
   runApp(MyApp());

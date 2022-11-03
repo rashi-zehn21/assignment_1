@@ -1,7 +1,7 @@
 import 'dart:convert';
 
-import 'package:assignment_1/notification_icon.dart';
-import 'package:assignment_1/video_player.dart';
+import 'package:assignment_1/Widget/notification_icon.dart';
+import 'package:assignment_1/Widget/video_player.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -35,24 +35,11 @@ class _HomePageState extends State<HomePage>
       vsync: this,
     );
   }
-  // callvideoBlocEvent() {
-  //   bloc.add(VideoScreenPressed(Url: Url));
-  // }
 
   @override
   void dispose() {
     super.dispose();
   }
-
-  // List items = [];
-
-  // Future<void> readJson() async {
-  //   final String response = await rootBundle.loadString('assets/home.json');
-  //   final data = await json.decode(response);
-  //   setState(() {
-  //     items = data["data"];
-  //   });
-  // }
 
   @override
   Widget build(BuildContext context) {
@@ -133,7 +120,6 @@ class _HomePageState extends State<HomePage>
                                     margin: EdgeInsets.all(2.0),
                                     decoration: BoxDecoration(
                                       borderRadius: BorderRadius.circular(8.0),
-                              
                                       color: Colors.black,
                                       image: DecorationImage(
                                         fit: BoxFit.cover,

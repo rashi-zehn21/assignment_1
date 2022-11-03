@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'main.dart';
-import 'home_page.dart';
+import '../main.dart';
+import '../home_page.dart';
 
 class NotificationIcon extends StatelessWidget {
   final IconData iconData;
