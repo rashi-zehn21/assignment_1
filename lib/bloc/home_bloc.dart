@@ -1,6 +1,5 @@
 import 'dart:convert';
 import 'dart:async';
-//import 'dart:math';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
@@ -34,11 +33,9 @@ class HomeDetailBloc extends Bloc<HomeDetailEvent, HomeDetailState> {
       print(e);
       yield HomeDetailError(err: "Error");
       print("ERROR");
-      // yield
     }
   }
 
-// }
   static getResponse() async {
     try {
       dynamic res = await rootBundle.loadString('assets/home.json');

@@ -1,10 +1,12 @@
+// ignore_for_file: prefer_const_literals_to_create_immutables
+
 import 'package:assignment_1/home_page.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:video_player/video_player.dart';
 import 'dart:async';
 import 'package:percent_indicator/linear_percent_indicator.dart';
-import '../asset_widget_controller.dart';
+
 import 'package:google_fonts/google_fonts.dart';
 
 class VideoPlayerScreen extends StatefulWidget {
@@ -31,19 +33,6 @@ class VideoPlayerScreen extends StatefulWidget {
 
 class VideoPlayerScreenState extends State<VideoPlayerScreen> {
   double _value = 0;
-  void downloadData() {
-    Timer.periodic(const Duration(seconds: 1), (Timer timer) {
-      setState(() {
-        if (_value == 1) {
-          timer.cancel();
-        } else {
-          _value = _value + 0.1;
-        }
-      });
-    });
-  }
-
-  
 
   late VideoPlayerController _controller;
   late Future<void> _initializeVideoPlayerFuture;
@@ -57,6 +46,23 @@ class VideoPlayerScreenState extends State<VideoPlayerScreen> {
     _controller.setLooping(true);
 
     super.initState();
+  }
+
+  void downloadData() {
+    Timer.periodic(const Duration(seconds: 4), (Timer timer) {
+      setState(() {
+        if (_value >= 4) {
+          _value = 0;
+        }
+        _value = _value + 0.4;
+
+        // if (_value == 1) {
+        //   timer.cancel();
+        // } else {
+        //   _value = _value + 1;
+        // }
+      });
+    });
   }
 
   @override
@@ -76,145 +82,146 @@ class VideoPlayerScreenState extends State<VideoPlayerScreen> {
     final isMuted = _controller.value.volume == 0;
     return Scaffold(
       body: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
-          Row(
-            mainAxisAlignment: MainAxisAlignment.start,
-            children: [
-              SizedBox(
-                width: 35,
-                height: 95,
-                child: IconButton(
-                    onPressed: () => {
-                          Navigator.of(context).push(MaterialPageRoute(
-                            builder: (context) => const HomePage(),
-                          ))
-                        },
-                    icon: const Icon(
-                      Icons.arrow_back_ios,
-                      size: 30.0,
-                      color: Colors.black,
-                    )),
-              ),
-            ],
-          ),
-          Container(
-            
-            child: Stack(
-              children: [
-                FutureBuilder(
-                  future: _initializeVideoPlayerFuture,
-                  builder: (context, snapshot) {
-                    if (snapshot.connectionState == ConnectionState.done) {
-                      return AspectRatio(
-                        aspectRatio: _controller.value.aspectRatio,
-                        child: VideoPlayer(_controller),
-                      );
-                    } else {
-                      return Center(
-                          child: CircularProgressIndicator(
-                        color: Color.fromARGB(255, 10, 169, 169),
-                        strokeWidth: 3,
-                        
-                      ));
-                    }
-                  },
-                ),
-
-                Positioned(
-                  top: 170,
-                  left: 10,
-                  child: InkWell(
-                    onTap: () {
-                      setState(() {
-                        // pause
-                        if (_controller.value.isPlaying) {
-                          _controller.pause();
-                        } else {
-                          // play
-                          _controller.play();
-                        }
-                      });
+          SizedBox(
+            width: 35,
+            height: 95,
+            child: IconButton(
+                onPressed: () => {
+                      Navigator.of(context).push(MaterialPageRoute(
+                        builder: (context) => const HomePage(),
+                      ))
                     },
-                    child: Container(
-                      height: 40,
-                      
-                      width: 40,
-                      decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(100),
-                          color: Color.fromARGB(255, 10, 169, 169)),
-                     
-                      child: Icon(
-                        color: Colors.white,
-                        size: 34,
-                        _controller.value.isPlaying
-                            ? Icons.pause
-                            : Icons.play_arrow,
-                      ),
+                icon: const Icon(
+                  Icons.arrow_back_ios,
+                  size: 30.0,
+                  color: Colors.black,
+                )),
+          ),
+          // Container(
+          Stack(
+            children: [
+              FutureBuilder(
+                future: _initializeVideoPlayerFuture,
+                builder: (context, snapshot) {
+                  if (snapshot.connectionState == ConnectionState.done) {
+                    return AspectRatio(
+                      aspectRatio: _controller.value.aspectRatio,
+                      child: VideoPlayer(_controller),
+                    );
+                  } else {
+                    return Container(
+                      height: 100,
+                      width: double.infinity,
+                      padding: const EdgeInsets.all(8.0),
+                      child: Center(
+                          child: CircularProgressIndicator(
+                        color: Color(0xff239C91),
+                        strokeWidth: 3,
+                      )),
+                    );
+                  }
+                },
+              ),
+              Positioned(
+                left: 10,
+                bottom: 10,
+                child: InkWell(
+                  onTap: () {
+                    setState(() {
+                      // pause
+                      if (_controller.value.isPlaying) {
+                        _controller.pause();
+                      } else {
+                        // play
+                        _controller.play();
+                        downloadData();
+                      }
+                    });
+                  },
+                  child: Container(
+                    height: 40,
+                    width: 40,
+                    decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(100),
+                        color: Color(0xff239C91)),
+                    child: Icon(
+                      color: Colors.white,
+                      size: 34,
+                      _controller.value.isPlaying
+                          ? Icons.pause
+                          : Icons.play_arrow,
                     ),
                   ),
                 ),
-                Positioned(
-                  left: 40,
+              ),
+              Positioned(
+                  bottom: 20,
+                  width: 225,
+                  left: 70,
+                  height: 15,
                   child: Container(
-                      height: 175,
-                      width: 235,
-                      alignment: Alignment.bottomRight,
-                      margin: const EdgeInsets.all(25),
-                      child: const LinearProgressIndicator(
-                        value: 0.5,
-                        valueColor: AlwaysStoppedAnimation<Color>(
-                            Color.fromARGB(255, 10, 169, 169)),
-                        backgroundColor: Colors.grey,
-                        minHeight: 10,
-                      )),
-                ),
-
-              
-                Positioned(
-                  left: 310,
-                  top: 180,
+                    width: 220,
+                    height: 10,
+                    child: ClipRRect(
+                      borderRadius:
+                          BorderRadius.all(const Radius.circular(20.0)),
+                      child: VideoProgressIndicator(
+                        _controller,
+                        allowScrubbing: false,
+                        colors: VideoProgressColors(
+                            //backgroundColor: Colors.white,
+                            bufferedColor: Colors.grey,
+                            playedColor: Color(0xff239C91)),
+                      ),
+                    ),
+                  )),
+              Positioned(
+                left: 310,
+                bottom: 14,
+                child: Icon(
+                    color: Colors.white,
+                    size: 28,
+                    _controller.value.isPlaying
+                        ? Icons.volume_down
+                        : Icons.volume_off),
+              ),
+              Positioned(
+                  left: 350,
+                  bottom: 14,
                   child: Icon(
                       color: Colors.white,
                       size: 28,
                       _controller.value.isPlaying
-                          ? Icons.volume_down
-                          : Icons.volume_off),
-                ),
-                Positioned(
-                    left: 350,
-                    top: 180,
-                    child: Icon(
-                        color: Colors.white,
-                        size: 28,
-                        _controller.value.isPlaying
-                            ? Icons.fullscreen_exit_rounded
-                            : Icons.fullscreen_sharp))
-              ],
-            ),
+                          ? Icons.fullscreen_exit_rounded
+                          : Icons.fullscreen_sharp))
+            ],
           ),
-          const SizedBox(height: 25),
-          const Padding(
-            padding: EdgeInsets.only(right: 150),
+          // ),
+          SizedBox(height: 25),
+          Padding(
+            padding: EdgeInsets.only(left: 16),
             child: Text(
-              " Shoulders + Back",
+              widget.Training_Name,
               style: TextStyle(
                   fontSize: 29,
                   fontFamily: "Montserrat",
                   fontWeight: FontWeight.bold),
             ),
           ),
-          const SizedBox(height: 5),
-          const Padding(
-            padding: EdgeInsets.only(right: 290),
-            child: Positioned(
-                child: Text(
-              '10 mins ',
+          SizedBox(height: 5),
+          Padding(
+            padding: EdgeInsets.only(left: 16),
+            child: Text(
+              widget.Duration,
               style: TextStyle(
                   color: Colors.black,
                   fontWeight: FontWeight.normal,
                   fontFamily: "Montserrat-Bold",
                   fontSize: 19.0),
-            )),
+            ),
           ),
           const SizedBox(height: 10),
           Container(
@@ -223,56 +230,64 @@ class VideoPlayerScreenState extends State<VideoPlayerScreen> {
             alignment: Alignment.topLeft,
             child: ElevatedButton(
               onPressed: () {},
-          
+              // ignore: sort_child_properties_last
               child: Row(
                 mainAxisSize: MainAxisSize.min,
                 mainAxisAlignment: MainAxisAlignment.start,
-               
                 children: <Widget>[
-                 
                   Icon(
                     Icons.star,
                     size: 15,
                     color: Colors.white,
                   ),
-                  Text(" 4.8"),
+                  Text(widget.Ratings),
                 ],
               ),
               style: ElevatedButton.styleFrom(
-                  primary: const Color.fromARGB(255, 10, 169, 169),
-                  shape: const StadiumBorder()),
+                  primary: Color(0xff239C91), shape: const StadiumBorder()),
             ),
           ),
-          const SizedBox(height: 5),
-          Container(
-            child: Padding(
-              padding: EdgeInsets.all(18.0),
-              child: Text(
-                widget.Description,
-                style: TextStyle(
-                  fontSize: 15,
-                  fontWeight: FontWeight.normal,
+          const SizedBox(height: 15),
+          Expanded(
+            child: Container(
+              child: Padding(
+                padding: EdgeInsets.only(left: 16, right: 16),
+                child: Text(
+                  widget.Description,
+                  style: TextStyle(
+                    fontSize: 15,
+                    fontWeight: FontWeight.normal,
+                  ),
                 ),
               ),
             ),
           ),
-          const SizedBox(height: 10),
-          SizedBox(
-            width: 325.0,
-            height: 52.0,
-            child: ElevatedButton(
-                child: Text('Attend Training'),
-                style: ElevatedButton.styleFrom(
-                  textStyle: const TextStyle(
-                      fontSize: 20, fontWeight: FontWeight.bold),
-                  primary: Color.fromARGB(255, 5, 147, 147),
-                  onPrimary: Colors.white,
-                  shape: const BeveledRectangleBorder(
-                      borderRadius: BorderRadius.all(Radius.circular(4))),
+          Row(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                SizedBox(
+                  height: MediaQuery.of(context).size.height / 12,
+                  width: MediaQuery.of(context).size.height / 2,
+                  child: ElevatedButton(
+                      child: Text('Attend Training'),
+                      style: ElevatedButton.styleFrom(
+                        textStyle: TextStyle(
+                            height: 1,
+                            fontSize: 20,
+                            fontWeight: FontWeight.bold),
+                        primary: Color(0xff239C91),
+                        onPrimary: Colors.white,
+                        shape: const BeveledRectangleBorder(
+                            borderRadius: BorderRadius.all(Radius.circular(4))),
+                      ),
+                      onPressed: () {
+                        print('Pressed');
+                      }),
                 ),
-                onPressed: () {
-                  print('Pressed');
-                }),
+              ]),
+          SizedBox(
+            height: 16,
           )
         ],
       ),

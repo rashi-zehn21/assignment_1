@@ -180,8 +180,7 @@ class _HomePageState extends State<HomePage>
                                         ],
                                       ),
                                       style: ElevatedButton.styleFrom(
-                                          primary:
-                                              Color.fromARGB(255, 10, 169, 169),
+                                          primary: Color(0xff239C91),
                                           shape: StadiumBorder()),
                                     ),
                                   )
@@ -307,7 +306,8 @@ class _HomePageState extends State<HomePage>
           "Profile",
         ],
 
-        icons: const [
+        // ignore: prefer_const_literals_to_create_immutables
+        icons: [
           Icons.home,
           Icons.shopping_cart,
           Icons.work,
@@ -324,7 +324,7 @@ class _HomePageState extends State<HomePage>
         tabIconSize: 30.0,
         tabIconSelectedSize: 32.0,
         tabSelectedColor: Color.fromARGB(255, 245, 242, 242),
-        tabIconSelectedColor: const Color.fromARGB(255, 10, 169, 169),
+        tabIconSelectedColor: Color(0xff239C91),
         // ignore: prefer_const_constructors
         tabBarColor: Color.fromARGB(
           255,
