@@ -107,15 +107,25 @@ class VideoPlayerScreenState extends State<VideoPlayerScreen> {
                 future: _initializeVideoPlayerFuture,
                 builder: (context, snapshot) {
                   if (snapshot.connectionState == ConnectionState.done) {
-                    return AspectRatio(
-                      aspectRatio: _controller.value.aspectRatio,
-                      child: VideoPlayer(_controller),
-                    );
+                    return _controller.value.isInitialized
+                        ? AspectRatio(
+                            aspectRatio: _controller.value.aspectRatio,
+                            child: VideoPlayer(_controller),
+                          )
+                        : Container(
+                            height: 100,
+                            width: double.infinity,
+                            padding: EdgeInsets.all(8.0),
+                            child: Center(
+                                child: CircularProgressIndicator(
+                              color: Color(0xff239C91),
+                              strokeWidth: 3,
+                            )));
                   } else {
                     return Container(
                       height: 100,
                       width: double.infinity,
-                      padding: const EdgeInsets.all(8.0),
+                      padding: EdgeInsets.all(8.0),
                       child: Center(
                           child: CircularProgressIndicator(
                         color: Color(0xff239C91),
@@ -126,58 +136,65 @@ class VideoPlayerScreenState extends State<VideoPlayerScreen> {
                 },
               ),
               Positioned(
-                left: 10,
-                bottom: 10,
-                child: InkWell(
-                  onTap: () {
-                    setState(() {
-                      // pause
-                      if (_controller.value.isPlaying) {
-                        _controller.pause();
-                      } else {
-                        // play
-                        _controller.play();
-                        downloadData();
-                      }
-                    });
-                  },
-                  child: Container(
-                    height: 40,
-                    width: 40,
-                    decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(100),
-                        color: Color(0xff239C91)),
-                    child: Icon(
-                      color: Colors.white,
-                      size: 34,
-                      _controller.value.isPlaying
-                          ? Icons.pause
-                          : Icons.play_arrow,
-                    ),
-                  ),
-                ),
-              ),
+                  left: 10,
+                  bottom: 10,
+                  child: _controller.value.isInitialized
+                      ? InkWell(
+                          onTap: () {
+                            setState(() {
+                              // pause
+                              if (_controller.value.isPlaying) {
+                                _controller.pause();
+                              } else {
+                                // play
+                                _controller.play();
+                                downloadData();
+                              }
+                            });
+                          },
+                          child: Container(
+                            height: 40,
+                            width: 40,
+                            decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(100),
+                                color: Color(0xff239C91)),
+                            child: Icon(
+                              color: Colors.white,
+                              size: 34,
+                              _controller.value.isPlaying
+                                  ? Icons.pause
+                                  : Icons.play_arrow,
+                            ),
+                          ),
+                        )
+                      : Container(
+                          height: 0,
+                        )),
               Positioned(
                   bottom: 20,
                   width: 225,
                   left: 70,
                   height: 15,
-                  child: Container(
-                    width: 220,
-                    height: 10,
-                    child: ClipRRect(
-                      borderRadius:
-                          BorderRadius.all(const Radius.circular(20.0)),
-                      child: VideoProgressIndicator(
-                        _controller,
-                        allowScrubbing: false,
-                        colors: VideoProgressColors(
-                            //backgroundColor: Colors.white,
-                            bufferedColor: Colors.grey,
-                            playedColor: Color(0xff239C91)),
-                      ),
-                    ),
-                  )),
+                  child: _controller.value.isInitialized
+                      ? Container(
+                          width: 220,
+                          height: 10,
+                          child: ClipRRect(
+                            borderRadius:
+                                BorderRadius.all(const Radius.circular(20.0)),
+                            child: VideoProgressIndicator(
+                              _controller,
+                              allowScrubbing: false,
+                              colors: VideoProgressColors(
+                                  //backgroundColor: Colors.white,
+                                  bufferedColor: Colors.grey,
+                                  playedColor: Color(0xff239C91)),
+                            ),
+                          ),
+                        )
+                      : Container(
+                          height: 0,
+                        )),
               Positioned(
                 left: 310,
                 bottom: 14,
