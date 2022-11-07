@@ -101,122 +101,124 @@ class VideoPlayerScreenState extends State<VideoPlayerScreen> {
                 )),
           ),
           // Container(
-          Stack(
-            children: [
-              FutureBuilder(
-                future: _initializeVideoPlayerFuture,
-                builder: (context, snapshot) {
-                  if (snapshot.connectionState == ConnectionState.done) {
-                    return _controller.value.isInitialized
-                        ? AspectRatio(
+          FutureBuilder(
+            future: _initializeVideoPlayerFuture,
+            builder: (context, snapshot) {
+              if (snapshot.connectionState == ConnectionState.done) {
+                return _controller.value.isInitialized
+                    ? Stack(
+                        children: [
+                          AspectRatio(
                             aspectRatio: _controller.value.aspectRatio,
                             child: VideoPlayer(_controller),
-                          )
-                        : Container(
-                            height: 100,
-                            width: double.infinity,
-                            padding: EdgeInsets.all(8.0),
-                            child: Center(
-                                child: CircularProgressIndicator(
-                              color: Color(0xff239C91),
-                              strokeWidth: 3,
-                            )));
-                  } else {
-                    return Container(
-                      height: 100,
-                      width: double.infinity,
-                      padding: EdgeInsets.all(8.0),
-                      child: Center(
-                          child: CircularProgressIndicator(
-                        color: Color(0xff239C91),
-                        strokeWidth: 3,
-                      )),
-                    );
-                  }
-                },
-              ),
-              Positioned(
-                  left: 10,
-                  bottom: 10,
-                  child: _controller.value.isInitialized
-                      ? InkWell(
-                          onTap: () {
-                            setState(() {
-                              // pause
-                              if (_controller.value.isPlaying) {
-                                _controller.pause();
-                              } else {
-                                // play
-                                _controller.play();
-                                downloadData();
-                              }
-                            });
-                          },
-                          child: Container(
-                            height: 40,
-                            width: 40,
-                            decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(100),
-                                color: Color(0xff239C91)),
+                          ),
+                          Positioned(
+                              left: 10,
+                              bottom: 10,
+                              child: _controller.value.isInitialized
+                                  ? InkWell(
+                                      onTap: () {
+                                        setState(() {
+                                          // pause
+                                          if (_controller.value.isPlaying) {
+                                            _controller.pause();
+                                          } else {
+                                            // play
+                                            _controller.play();
+                                            downloadData();
+                                          }
+                                        });
+                                      },
+                                      child: Container(
+                                        height: 40,
+                                        width: 40,
+                                        decoration: BoxDecoration(
+                                            borderRadius:
+                                                BorderRadius.circular(100),
+                                            color: Color(0xff239C91)),
+                                        child: Icon(
+                                          color: Colors.white,
+                                          size: 34,
+                                          _controller.value.isPlaying
+                                              ? Icons.pause
+                                              : Icons.play_arrow,
+                                        ),
+                                      ),
+                                    )
+                                  : Container(
+                                      height: 0,
+                                    )),
+                          Positioned(
+                              bottom: 20,
+                              width: 225,
+                              left: 70,
+                              height: 15,
+                              child: _controller.value.isInitialized
+                                  ? Container(
+                                      width: 220,
+                                      height: 10,
+                                      child: ClipRRect(
+                                        borderRadius: BorderRadius.all(
+                                            const Radius.circular(20.0)),
+                                        child: VideoProgressIndicator(
+                                          _controller,
+                                          allowScrubbing: false,
+                                          colors: VideoProgressColors(
+                                              //backgroundColor: Colors.white,
+                                              bufferedColor: Colors.grey,
+                                              playedColor: Color(0xff239C91)),
+                                        ),
+                                      ),
+                                    )
+                                  : Container(
+                                      height: 0,
+                                    )),
+                          Positioned(
+                            left: 310,
+                            bottom: 14,
                             child: Icon(
-                              color: Colors.white,
-                              size: 34,
-                              _controller.value.isPlaying
-                                  ? Icons.pause
-                                  : Icons.play_arrow,
-                            ),
+                                color: Colors.white,
+                                size: 28,
+                                _controller.value.isPlaying
+                                    ? Icons.volume_down
+                                    : Icons.volume_off),
                           ),
-                        )
-                      : Container(
-                          height: 0,
-                        )),
-              Positioned(
-                  bottom: 20,
-                  width: 225,
-                  left: 70,
-                  height: 15,
-                  child: _controller.value.isInitialized
-                      ? Container(
-                          width: 220,
-                          height: 10,
-                          child: ClipRRect(
-                            borderRadius:
-                                BorderRadius.all(const Radius.circular(20.0)),
-                            child: VideoProgressIndicator(
-                              _controller,
-                              allowScrubbing: false,
-                              colors: VideoProgressColors(
-                                  //backgroundColor: Colors.white,
-                                  bufferedColor: Colors.grey,
-                                  playedColor: Color(0xff239C91)),
-                            ),
-                          ),
-                        )
-                      : Container(
-                          height: 0,
-                        )),
-              Positioned(
-                left: 310,
-                bottom: 14,
-                child: Icon(
-                    color: Colors.white,
-                    size: 28,
-                    _controller.value.isPlaying
-                        ? Icons.volume_down
-                        : Icons.volume_off),
-              ),
-              Positioned(
-                  left: 350,
-                  bottom: 14,
-                  child: Icon(
-                      color: Colors.white,
-                      size: 28,
-                      _controller.value.isPlaying
-                          ? Icons.fullscreen_exit_rounded
-                          : Icons.fullscreen_sharp))
-            ],
+                          Positioned(
+                              left: 350,
+                              bottom: 14,
+                              child: Icon(
+                                  color: Colors.white,
+                                  size: 28,
+                                  _controller.value.isPlaying
+                                      ? Icons.fullscreen_exit_rounded
+                                      : Icons.fullscreen_sharp)),
+                          // ),
+                        ],
+                      )
+                    : Container(
+                        height: 100,
+                        width: double.infinity,
+                        padding: EdgeInsets.all(8.0),
+                        child: Center(
+                            child: CircularProgressIndicator(
+                          color: Color(0xff239C91),
+                          strokeWidth: 3,
+                        )));
+              } else {
+                return Container(
+                  height: 100,
+                  width: double.infinity,
+                  padding: EdgeInsets.all(8.0),
+                  child: Center(
+                      child: CircularProgressIndicator(
+                    color: Color(0xff239C91),
+                    strokeWidth: 3,
+                  )),
+                );
+              }
+            },
           ),
-          // ),
+
           SizedBox(height: 25),
           Padding(
             padding: EdgeInsets.only(left: 16),
